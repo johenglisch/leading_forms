@@ -55,7 +55,7 @@ class Paradigm:
     def realise_cells(self):
         self.filled = [
             [realise(self.constraints, self.candidates, c)
-             for c in self.cols]
+             for c in self.columns]
             for r in self.rows]
 
     def str(self):

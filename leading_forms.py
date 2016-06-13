@@ -42,14 +42,14 @@ class Paradigm:
     def __init__(
             self, row_features, column_features, leading_forms, constraints,
             candidates=None):
-        self.rows = permutate_features(row_features)
-        self.columns = permutate_features(column_features)
+        self.rows = list(permutate_features(row_features))
+        self.columns = list(permutate_features(column_features))
         self.features = row_features + column_features
         self.leading_forms = leading_forms
         self.constraints = constraints
         self.candidates = (
             candidates if candidates is not None
-            else permutate_forms(leading_forms, self.features))
+            else list(permutate_forms(leading_forms, self.features)))
         self.filled = None
 
     def realise_cells(self):
@@ -61,8 +61,9 @@ class Paradigm:
     def __str__(self):
         if self.filled is None:
             self.realise_cells()
-        strings = [list(map(str, row)) for row in self.filled]
-        # TODO create ascii table
+        strings = [
+            [list(map(str, cell)) for cell in row]
+            for row in self.filled]
 
 
 ## Constraints ##

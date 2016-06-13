@@ -37,6 +37,27 @@ class Candidate:
             features=features_to_str(self.features))
 
 
+class Paradigm:
+    def __init__(
+            self, rows, columns, leading_forms, constraints, candidates=None):
+        self.rows = rows
+        self.columns = columns
+        self.features = rows + columns
+        self.leading_forms = leading_forms
+        self.constraints = constraints
+        self.candidates = (
+            candidates if candidates is not None
+            else permutate_forms(candidates))
+        self.filled = None
+
+    def realise_cells(self):
+        pass
+
+    def str(self):
+        # TODO create ascii table
+        pass
+
+
 ## Constraints ##
 
 def match(paradigm_cell, candidate):

@@ -58,8 +58,10 @@ class Paradigm:
              for c in self.columns]
             for r in self.rows]
 
-    def str(self):
-        pass
+    def __str__(self):
+        if self.filled is None:
+            self.realise_cells()
+        strings = [list(map(str, row)) for row in self.filled]
         # TODO create ascii table
 
 

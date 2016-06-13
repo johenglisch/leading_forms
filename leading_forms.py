@@ -1,5 +1,6 @@
 from itertools import product
 from functools import partial
+from collections import ChainMap
 
 
 ## Helper functions ##
@@ -52,7 +53,10 @@ class Paradigm:
         self.filled = None
 
     def realise_cells(self):
-        pass
+        self.filled = [
+            [realise(self.constraints, self.candidates, c)
+             for c in self.cols]
+            for r in self.rows]
 
     def str(self):
         # TODO create ascii table

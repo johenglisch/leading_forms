@@ -1,3 +1,6 @@
+from functools import partial
+
+
 ## Helper functions ##
 
 def features_to_str(features):
@@ -35,20 +38,20 @@ class Candidate:
 
 ## Constraints ##
 
-class Ident:
-    def __init__(self, feature):
-        self.feature = feature
-
-    def __call__(self, cell, cand):
-        if cand.leading_form.features[self.feature] == cand.features[self.feature]:
-            return 0
-        return 1
-
-
 def match(paradigm_cell, candidate):
     return sum(
         paradigm_cell[f] != candidate.features[f]
         for f in candidate.features)
+
+
+def _general_ident(feature, paradigm_cell, candidate):
+    if candidate.leading_form.features[feature] == candidate.features[feature]:
+        return 0
+    return 1
+
+
+def ident(feature):
+    return partial(_general_ident, feature)
 
 
 ## Functions ##

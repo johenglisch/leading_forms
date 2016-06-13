@@ -61,6 +61,7 @@ class Paradigm:
     def __str__(self):
         if self.filled is None:
             self.realise_cells()
+
         strings = [
             [list(map(str, cell)) for cell in row]
             for row in self.filled]

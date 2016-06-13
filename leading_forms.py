@@ -56,7 +56,7 @@ def ident(feature):
 
 ## Functions ##
 
-def optimise(constraints, candidates, paradigm_cell):
+def realise(constraints, candidates, paradigm_cell):
     optimal = None
     outputs = list()
     for candidate in candidates:

@@ -49,7 +49,7 @@ class Paradigm:
         self.constraints = constraints
         self.candidates = (
             candidates if candidates is not None
-            else permutate_forms(candidates))
+            else permutate_forms(leading_forms, self.features))
         self.filled = None
 
     def realise_cells(self):
@@ -59,8 +59,8 @@ class Paradigm:
             for r in self.rows]
 
     def str(self):
-        # TODO create ascii table
         pass
+        # TODO create ascii table
 
 
 ## Constraints ##

@@ -62,6 +62,7 @@ class Paradigm:
         if self.filled is None:
             self.realise_cells()
 
+        # TODO Add header with features
         strings = [
             [list(map(str, cell)) for cell in row]
             for row in self.filled]
@@ -71,6 +72,8 @@ class Paradigm:
                 max(map(len, strings[row][col]))
                 for row in range(len(strings)))
             for col in range(len(strings[0])))
+
+        # TODO Draw table
 
 
 ## Constraints ##

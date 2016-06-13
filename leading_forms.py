@@ -39,10 +39,11 @@ class Candidate:
 
 class Paradigm:
     def __init__(
-            self, rows, columns, leading_forms, constraints, candidates=None):
-        self.rows = rows
-        self.columns = columns
-        self.features = rows + columns
+            self, row_features, column_features, leading_forms, constraints,
+            candidates=None):
+        self.rows = permutate_features(row_features)
+        self.columns = permutate_features(column_features)
+        self.features = row_features + column_features
         self.leading_forms = leading_forms
         self.constraints = constraints
         self.candidates = (

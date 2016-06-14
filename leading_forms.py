@@ -5,6 +5,8 @@ from collections import ChainMap
 
 ## Helper functions ##
 
+# Feature permutation
+
 def permutate_features(features):
     return (
         dict(zip(features, permutation))
@@ -18,6 +20,8 @@ def permutate_forms(leading_forms, features):
         for spec in possible_specs)
 
 
+# Pretty-printing features
+
 def feature_to_str(feature_tuple):
     feat, val = feature_tuple
     return '{val}{feat}'.format(feat=feat, val='+' if val else '-')
@@ -25,6 +29,8 @@ def feature_to_str(feature_tuple):
 def features_to_str(features):
     return ' '.join(map(feature_to_str, sorted(features.items())))
 
+
+# Pretty-printing tables
 
 def max_lengths(rows):
     return [max(max(map(len, c)) for c in col) for col in zip(*rows)]

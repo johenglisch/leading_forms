@@ -6,9 +6,8 @@ from collections import ChainMap
 ## Helper functions ##
 
 def feature_to_str(feature_tuple):
-    return '{val}{feat}'.format(
-        feat=feature_tuple[0],
-        val='+' if feature_tuple[1] else '-')
+    feat, val = feature_tuple
+    return '{val}{feat}'.format(feat=feat, val='+' if val else '-')
 
 def features_to_str(features):
     return ' '.join(map(feature_to_str, sorted(features.items())))
@@ -147,10 +146,14 @@ def realise(constraints, candidates, paradigm_cell):
     optimal = None
     outputs = list()
     for candidate in candidates:
-        violations = tuple(c(paradigm_cell, candidate) for c in constraints)
+        violations = tuple(
+            constraint(paradigm_cell, candidate)
+            for constraint in constraints)
+
         if optimal is None or optimal > violations:
             optimal = violations
             outputs = list()
         if optimal == violations:
             outputs.append(candidate)
+
     return outputs

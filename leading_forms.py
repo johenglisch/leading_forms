@@ -124,7 +124,6 @@ def _general_ident(feature, paradigm_cell, candidate):
         return 0
     return 1
 
-
 def ident(feature):
     return partial(_general_ident, feature)
 

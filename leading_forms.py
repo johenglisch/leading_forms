@@ -31,6 +31,11 @@ class Candidate:
         self.leading_form = leading_form
         self.features = features
 
+    def phon(self):
+        return '{phon}_{index}'.format(
+            phon=self.leading_form.phon,
+            index=self.leading_form.index)
+
     def __str__(self):
         return '<{phon}_{index}, [{features}]>'.format(
             phon=self.leading_form.phon,
@@ -64,7 +69,7 @@ class Paradigm:
 
         # TODO Add header with features
         strings = [
-            [list(map(str, cell)) for cell in row]
+            [list(c.phon() for c in cell) for cell in row]
             for row in self.filled]
         heights = [max(map(len, row)) for row in strings]
         widths = list(

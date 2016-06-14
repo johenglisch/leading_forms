@@ -70,8 +70,10 @@ class Paradigm:
         if self.filled is None:
             self.realise_cells()
 
-        # TODO Add header
-        strings = list()
+        strings = [[['']] + [
+            list(map(feature_to_str, sorted(col.items())))
+            for col in self.columns]]
+
         for row_i, row in enumerate(self.filled):
             s_row = [[features_to_str(self.rows[row_i])]]
             for col in row:

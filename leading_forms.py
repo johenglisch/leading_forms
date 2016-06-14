@@ -5,6 +5,19 @@ from collections import ChainMap
 
 ## Helper functions ##
 
+def permutate_features(features):
+    return (
+        dict(zip(features, permutation))
+        for permutation in product((False, True), repeat=len(features)))
+
+def permutate_forms(leading_forms, features):
+    possible_specs = list(permutate_features(features))
+    return (
+        Candidate(form, spec)
+        for form in leading_forms
+        for spec in possible_specs)
+
+
 def feature_to_str(feature_tuple):
     feat, val = feature_tuple
     return '{val}{feat}'.format(feat=feat, val='+' if val else '-')
@@ -128,19 +141,6 @@ def ident(feature):
 
 
 ## Functions ##
-
-def permutate_features(features):
-    return (
-        dict(zip(features, permutation))
-        for permutation in product((False, True), repeat=len(features)))
-
-def permutate_forms(leading_forms, features):
-    possible_specs = list(permutate_features(features))
-    return (
-        Candidate(form, spec)
-        for form in leading_forms
-        for spec in possible_specs)
-
 
 def realise(constraints, candidates, paradigm_cell):
     optimal = None

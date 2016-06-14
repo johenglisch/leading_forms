@@ -133,7 +133,7 @@ def ident(feature):
 def permutate_features(features):
     return (
         dict(zip(features, permutation))
-        for permutation in product((True, False), repeat=len(features)))
+        for permutation in product((False, True), repeat=len(features)))
 
 def permutate_forms(leading_forms, features):
     possible_specs = list(permutate_features(features))

@@ -5,10 +5,13 @@ from collections import ChainMap
 
 ## Helper functions ##
 
+def feature_to_str(feature_tuple):
+    return '{val}{feat}'.format(
+        feat=feature_tuple[0],
+        val='+' if feature_tuple[1] else '-')
+
 def features_to_str(features):
-    return ' '.join(
-        '{val}{feat}'.format(feat=f, val='+' if features[f] else '-')
-        for f in sorted(features))
+    return ' '.join(map(feature_to_str, sorted(features.items())))
 
 
 ## Structs ##

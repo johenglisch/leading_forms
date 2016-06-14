@@ -1,4 +1,4 @@
-from itertools import product
+from itertools import product, zip_longest
 from functools import partial
 from collections import ChainMap
 
@@ -12,6 +12,34 @@ def feature_to_str(feature_tuple):
 
 def features_to_str(features):
     return ' '.join(map(feature_to_str, sorted(features.items())))
+
+
+def max_lengths(rows):
+    return [max(max(map(len, c)) for c in col) for col in zip(*rows)]
+
+def render_line(line, lengths):
+    return '  '.join(
+        '{cell:<{len}}'.format(
+            cell=cell if cell is not None else '',
+            len=length)
+        for cell, length in zip(line, lengths))
+
+def render_row(row, lengths):
+    lines = (
+        ' {} '.format(render_line(line, lengths))
+        for line in zip_longest(*row))
+    return '\n'.join(lines)
+
+def ascii_table(rows):
+    lengths = max_lengths(rows)
+    dline = '=' * (sum(lengths) + 2 * len(lengths))
+    sline = '-' * (sum(lengths) + 2 * len(lengths))
+
+    lines = [dline, render_row(rows[0], lengths), sline]
+    lines.extend(render_row(row, lengths) for row in rows[1:])
+    lines.append(dline)
+
+    return '\n'.join(lines)
 
 
 ## Structs ##
@@ -80,8 +108,7 @@ class Paradigm:
                 s_row.append([c.phon() for c in col])
             strings.append(s_row)
 
-        # TODO Draw table
-        return str(strings)
+        return ascii_table(strings)
 
 
 ## Constraints ##

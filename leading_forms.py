@@ -1,4 +1,4 @@
-from itertools import product, zip_longest
+from itertools import chain, product, zip_longest
 from functools import partial
 from collections import ChainMap
 
@@ -95,20 +95,30 @@ class Candidate:
 class Paradigm:
     def __init__(
             self, row_features, column_features, leading_forms, constraints,
-            candidates=None):
+            default_features=None, candidates=None):
         self.rows = list(permutate_features(row_features))
         self.columns = list(permutate_features(column_features))
-        self.features = row_features + column_features
         self.leading_forms = leading_forms
         self.constraints = constraints
+        self.default_features = (
+            default_features if default_features is not None
+            else dict())
+
+        self.features = set(chain(
+            self.default_features.keys(), row_features, column_features))
+
         self.candidates = (
             candidates if candidates is not None
             else list(permutate_forms(leading_forms, self.features)))
+
         self.filled = None
 
     def realise_cells(self):
         self.filled = [
-            [realise(self.constraints, self.candidates, ChainMap(r, c))
+            [realise(
+                self.constraints,
+                self.candidates,
+                ChainMap(r, c, self.default_features))
              for c in self.columns]
             for r in self.rows]
 

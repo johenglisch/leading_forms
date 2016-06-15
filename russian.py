@@ -52,6 +52,8 @@ def main():
         {'anim': True,  'a': True,  'b': False},
         {'anim': True,  'a': False, 'b': True}]
 
+    print(paradigm)
+
     print(tableau(
         constraints, paradigm.candidates,
         {'obl': False, 'gov': True, 'subj': False, 'a': True, 'b': False, 'anim': False},

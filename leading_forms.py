@@ -240,7 +240,7 @@ class Paradigm:
             list(map(render_feature, sorted(col.items())))
             for col in self.columns]]
 
-        for row_i, row in enumerate(self.filled):
+        for row_i, row in enumerate(self._filled):
             s_row = [[render_featureset(self.rows[row_i])]]
             for col in row:
                 s_row.append([c.phon() for c in col])

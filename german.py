@@ -1,5 +1,7 @@
 #! /usr/bin/env/python3
 
+"""Analysis of German determiner inflection without underspecification."""
+
 from leading_forms import *
 
 

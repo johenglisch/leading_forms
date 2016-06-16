@@ -1,9 +1,22 @@
 #! /usr/bin/env/python3
 
+"""Analysis of the Russian animacy split without underspecification.
+
+Works slightly different than the analysis in Mueller (2011), in that it does
+not consider changing stem features but rather allows for MATCH violations.
+
+"""
+
 from leading_forms import *
 
 
 def no_gov_inanim(paradigm_cell, candidate):
+    """*GOV/ANIM.
+
+    Return a violation if an affix is specified [+gov] in a [-obl -subj -anim]
+    context.
+
+    """
     if all([not paradigm_cell['obl'],
             not paradigm_cell['subj'],
             not paradigm_cell['anim'],
@@ -13,6 +26,12 @@ def no_gov_inanim(paradigm_cell, candidate):
 
 
 def match_gov_cl2_sg(paradigm_cell, candidate):
+    """MATCH[gov]_(Cl2,Sg).
+
+    Return a violation if the value for [gov] in a candidate differs from the
+    value in its corresponding leading form in a [-pl -a +b] context.
+
+    """
     if all([not paradigm_cell['a'],
             paradigm_cell['b'],
             paradigm_cell['gov'] != candidate.features['gov']]):

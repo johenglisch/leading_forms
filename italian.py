@@ -1,5 +1,7 @@
 #! /usr/bin/env/python3
 
+"""Analysis of Italian object clitics without underspecification."""
+
 from leading_forms import *
 
 

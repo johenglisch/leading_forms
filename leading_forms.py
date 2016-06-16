@@ -67,15 +67,13 @@ def ascii_table(rows):
 ## Structs ##
 
 class LeadingForm:
-    def __init__(self, index, phon, features):
-        self.index = index
+    def __init__(self, phon, features):
         self.phon = phon
         self.features = features
 
     def __str__(self):
-        return '{phon}_{index} \u2194 [{features}]'.format(
+        return '{phon} \u2194 [{features}]'.format(
             phon=self.phon,
-            index=self.index,
             features=features_to_str(self.features))
 
 
@@ -85,14 +83,11 @@ class Candidate:
         self.features = features
 
     def phon(self):
-        return '{phon}_{index}'.format(
-            phon=self.leading_form.phon,
-            index=self.leading_form.index)
+        return self.leading_form.phon
 
     def __str__(self):
-        return '<{phon}_{index}, [{features}]>'.format(
+        return '<{phon}, [{features}]>'.format(
             phon=self.leading_form.phon,
-            index=self.leading_form.index,
             features=features_to_str(self.features))
 
 

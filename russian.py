@@ -21,11 +21,11 @@ def match_gov_cl2_sg(paradigm_cell, candidate):
 
 
 leading_forms = [
-    LeadingForm('\u2205', {'a': True,  'b': False, 'gov': False, 'subj': True,  'obl': False}),
-    LeadingForm('a_1',    {'a': True,  'b': False, 'gov': True,  'subj': True,  'obl': False}),
-    LeadingForm('a_2',    {'a': False, 'b': True,  'gov': False, 'subj': True,  'obl': False}),
-    LeadingForm('u',      {'a': False, 'b': True,  'gov': True,  'subj': False, 'obl': False}),
-    LeadingForm('y',      {'a': False, 'b': True,  'gov': True,  'subj': True,  'obl': False})]
+    LeadingForm('\u2205', parse_features('+a -b -gov +subj -obl')),
+    LeadingForm('a_1',    parse_features('+a -b +gov +subj -obl')),
+    LeadingForm('a_2',    parse_features('-a +b -gov +subj -obl')),
+    LeadingForm('u',      parse_features('-a +b +gov -subj -obl')),
+    LeadingForm('y',      parse_features('-a +b +gov +subj -obl'))]
 
 constraints = [
     match_gov_cl2_sg,

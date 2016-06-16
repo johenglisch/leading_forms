@@ -4,17 +4,17 @@ from leading_forms import *
 
 
 leading_forms = [
-    LeadingForm('lo',   {'refl': False, '1': False, '2': False, 'pl': False, 'fem': False, 'gov': True,  'obl': False}),
-    LeadingForm('la',   {'refl': False, '1': False, '2': False, 'pl': False, 'fem': True,  'gov': True,  'obl': False}),
-    LeadingForm('li',   {'refl': False, '1': False, '2': False, 'pl': True,  'fem': False, 'gov': True,  'obl': False}),
-    LeadingForm('le_1', {'refl': False, '1': False, '2': False, 'pl': True,  'fem': True,  'gov': True,  'obl': False}),
-    LeadingForm('gli',  {'refl': False, '1': False, '2': False, 'pl': False, 'fem': False, 'gov': True,  'obl': True}),
-    LeadingForm('le_2', {'refl': False, '1': False, '2': False, 'pl': False, 'fem': True,  'gov': True,  'obl': True}),
-    LeadingForm('mi',   {'refl': False, '1': True,  '2': False, 'pl': False, 'fem': True,  'gov': True,  'obl': False}),
-    LeadingForm('ti',   {'refl': False, '1': False, '2': True,  'pl': False, 'fem': True,  'gov': True,  'obl': False}),
-    LeadingForm('ci',   {'refl': False, '1': True,  '2': False, 'pl': True,  'fem': True,  'gov': True,  'obl': False}),
-    LeadingForm('vi',   {'refl': False, '1': False, '2': True,  'pl': True,  'fem': True,  'gov': True,  'obl': False}),
-    LeadingForm('si',   {'refl': True,  '1': False, '2': False, 'pl': False, 'fem': True,  'gov': True,  'obl': False})]
+    LeadingForm('lo',   parse_features('-refl -1 -2 -pl -fem +gov -obl')),
+    LeadingForm('la',   parse_features('-refl -1 -2 -pl +fem +gov -obl')),
+    LeadingForm('li',   parse_features('-refl -1 -2 +pl -fem +gov -obl')),
+    LeadingForm('le_1', parse_features('-refl -1 -2 +pl +fem +gov -obl')),
+    LeadingForm('gli',  parse_features('-refl -1 -2 -pl -fem +gov +obl')),
+    LeadingForm('le_2', parse_features('-refl -1 -2 -pl +fem +gov +obl')),
+    LeadingForm('mi',   parse_features('-refl +1 -2 -pl +fem +gov -obl')),
+    LeadingForm('ti',   parse_features('-refl -1 +2 -pl +fem +gov -obl')),
+    LeadingForm('ci',   parse_features('-refl +1 -2 +pl +fem +gov -obl')),
+    LeadingForm('vi',   parse_features('-refl -1 +2 +pl +fem +gov -obl')),
+    LeadingForm('si',   parse_features('+refl -1 -2 -pl +fem +gov -obl'))]
 
 constraints = [
     match,

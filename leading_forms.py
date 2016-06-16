@@ -29,6 +29,10 @@ def feature_to_str(feature_tuple):
 def features_to_str(features):
     return ' '.join(map(feature_to_str, sorted(features.items())))
 
+def parse_features(string):
+    return dict(
+        (elem[1:], elem[0] == '+') for elem in string.split())
+
 
 # Pretty-printing tables
 

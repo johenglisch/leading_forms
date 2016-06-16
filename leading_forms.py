@@ -126,6 +126,35 @@ class Paradigm:
              for c in self.columns]
             for r in self.rows]
 
+    def derivation(self, feature_string, max_lines=None):
+        paradigm_cell = parse_features(feature_string)
+
+        violations = list(
+            tuple(
+                constraint(paradigm_cell, candidate)
+                for constraint in self.constraints)
+            for candidate in self.candidates)
+
+        optimal = min(violations)
+
+        strings = [
+            [[features_to_str(paradigm_cell)]]
+            + [[str(i)] for i in range(len(self.constraints))]]
+        lineno = 0
+        for profile, candidate in sorted(
+                zip(violations, self.candidates),
+                key=lambda x: x[0]):
+            if max_lines is not None and lineno >= max_lines:
+                break
+            lineno += 1
+            row = [['{}{}'.format(
+                '\u2192' if profile == optimal else ' ',
+                candidate)]]
+            row.extend([str(v)] for v in profile)
+            strings.append(row)
+
+        return ascii_table(strings)
+
     def __str__(self):
         if self.filled is None:
             self.realise_cells()
@@ -177,32 +206,3 @@ def realise(constraints, candidates, paradigm_cell):
             outputs.append(candidate)
 
     return outputs
-
-def tableau(constraints, candidates, paradigm_cell, max_lines=None):
-    optimal = None
-
-    violations = list(
-        tuple(
-            constraint(paradigm_cell, candidate)
-            for constraint in constraints)
-        for candidate in candidates)
-
-    optimal = min(violations)
-
-    strings = [
-        [[features_to_str(paradigm_cell)]]
-        + [[str(i)] for i in range(len(constraints))]]
-    lineno = 0
-    for profile, candidate in sorted(
-            zip(violations, candidates),
-            key=lambda x: x[0]):
-        if max_lines is not None and lineno >= max_lines:
-            break
-        lineno += 1
-        row = [['{}{}'.format(
-            '\u2192' if profile == optimal else ' ',
-            candidate)]]
-        row.extend([str(v)] for v in profile)
-        strings.append(row)
-
-    return ascii_table(strings)
